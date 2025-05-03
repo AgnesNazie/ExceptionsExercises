@@ -1,12 +1,18 @@
 package com.agnes.practice;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NameManager {
     public static void main(String[] args) {
-        exe7();
+        exe8();
     }
+
     private List<String> name;
 
     //constructor
@@ -33,21 +39,34 @@ public class NameManager {
         name.add(names);
         System.out.println("Name added " + names);
     }
+
     //test
-    public static void exe7(){
+    public static void exe7() {
         NameManager nameManager = new NameManager();
         try {
             nameManager.addName("Agnes");
             nameManager.addName("Nazie");
             nameManager.addName("Mehrdad");
             nameManager.addName("Agnes");
-        } catch (DuplicateNameExceptions e){
+        } catch (DuplicateNameExceptions e) {
             System.out.println(e.getMessage());
         }
         try {
             nameManager.foundName("che");
         } catch (NameNotFoundExceptions e) {
             System.out.println(e.getMessage());
+        }
+    }
+
+    public static void exe8() {
+        Path path = Paths.get("sample.txt");
+        String text = "Hello, this text is written using try-with-resources in Java!";
+        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
+            writer.write(text);
+            System.out.println("Text written to file successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred: " + e.getMessage());
+
         }
     }
 
